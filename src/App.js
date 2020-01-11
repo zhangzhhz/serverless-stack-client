@@ -14,13 +14,6 @@ function App(props) {
     onLoad();
   }, []);
   
-  // The following will generate waring in browser console:
-  // useEffect(onLoad, []);
-  /* Warning: An effect function must not return anything besides a function, which is used for clean-up.
-
-     It looks like you wrote useEffect(async () => ...) or returned a Promise. Instead, write the async function inside your effect and call it immediately:
-  */
-  
   async function onLoad() {
     try {
       await Auth.currentSession();
@@ -62,7 +55,14 @@ function App(props) {
           <Nav pullRight>
             {isAuthenticated
               // ? <LinkContainer to='/logout'><NavItem>Logout</NavItem></LinkContainer>
-              ? <NavItem onClick={handleLogout}>Logout</NavItem>
+              ? (
+                <>
+                  <LinkContainer to='/settings'>
+                    <NavItem>Settings</NavItem>
+                  </LinkContainer>
+                  <NavItem onClick={handleLogout}>Logout</NavItem>
+                </>
+              )
               : <>
                 <LinkContainer to="/signup">
                   <NavItem>Signup</NavItem>
