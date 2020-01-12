@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import { Auth } from 'aws-amplify';
 import LoaderButton from '../components/LoaderButton';
 import { useFormFields } from "../libs/hooksLib";
@@ -30,10 +30,14 @@ export default function Login(props) {
       console.log("Authenticating...");
       // await Auth.signIn(email, password);
       await Auth.signIn(fields.email, fields.password);
-      props.userHasAuthenticated(true);
       setIsLoading(false);
-      console.log(`userHasAuthenticated... Redirecting to App..`);
-      props.history.push("/");
+      props.userHasAuthenticated(true);
+      // The following seems to cause setting state on a unmounted component
+      // due to the program control already going to UnauthenticatedRoute.
+      // Move it to before the previous userHasAuthenticated statement if you want to set it.
+      // setIsLoading(false);
+      console.log(`userHasAuthenticated... Redirecting accordingly by UnauthenticatedRoute..`);
+      // props.history.push("/"); // redirection is done by UnauthenticatedRoute now
     } catch (e) {
       setIsLoading(false);
       alert(e.message);

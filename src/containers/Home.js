@@ -35,7 +35,7 @@ export default function Home(props) {
   function renderNotesList(notes) {
     // console.log(notes); // [{content: "", createdAt: Date.now(), noteId: "", userId: ""}, {...}]
     return [{}].concat(notes).map((note, i) => 
-      i != 0 ? (
+      i !== 0 ? (
         <LinkContainer key={note.noteId} to={`/notes/${note.noteId}`}>
           <ListGroupItem header={note.content.trim().split("\n")[0]}>
             {"Created at " + new Date(note.createdAt).toLocaleString()}

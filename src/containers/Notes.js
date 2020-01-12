@@ -119,9 +119,7 @@ export default function Notes(props) {
     setIsDeleting(true);
 
     try {
-      const ret = await deleteNote();
-      // console.log(`Deleted note content: [${content}]`);
-      // console.log(`Deleted note content: RC = [${JSON.stringify(ret, null, 4)}]`);
+      await deleteNote();
       // delete attachment if any
       if (note.attachment) {
         // console.log(`Deleting note attachment: [${note.attachment}]`);

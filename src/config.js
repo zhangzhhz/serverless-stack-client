@@ -1,5 +1,6 @@
 export default {
   MAX_ATTACHMENT_SIZE: 5000000,
+  STRIPE_KEY: "pk_test_Bfx3WBccFhGw9KJVcwO2liFI",
   s3: {
     REGION: "ap-northeast-1",
     BUCKET: "notes-app-uploads-zhce19"
